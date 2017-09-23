@@ -16,16 +16,18 @@ if __name__=='__main__':
   input_dir = argv[1]
   languages = argv[2]
   mode = argv[3]
-  outfile_name = argv[4]
+  setting = argv[4]
+  outfile_name = argv[5]
 
-  if setting == "train":
-    end = "-" + setting + "-" + mode
-  elif setting == "dev":
-    end = "-" + setting
-  elif setting == "test":
+
+  if mode == "train":
+    end = "-" + mode + "-" + setting
+  elif mode == "dev":
+    end = "-" + mode
+  elif mode == "test":
     end = "-covered-" + test
 
-  with codecs.open(input_dir + "/" + outfile_name, "w", 'utf-8') as out:
-    for lang in languages:
-      FN = input_dir + "/" + lang + end
-      out.write(FN.read())
+  with codecs.open(input_dir + outfile_name + end, "w", 'utf-8') as out:
+    for lang in languages.split(","):
+      FN = input_dir + lang + end
+      out.write(codecs.open(FN, "r").read())
