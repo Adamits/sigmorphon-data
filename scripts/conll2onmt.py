@@ -19,7 +19,7 @@ if __name__=='__main__':
   data = [l.strip().split('\t') for l in codecs.open(FN, 'r', 'utf-8') if l.strip() != '']
 
   with codecs.open(output + "/" + FN.split("/")[-1] + "-src.txt", "w", 'utf-8') as out_src:
-    out_src.write("\n".join([" ".join([l for l in lemma]) + " " + " ".join(label.split(";")) for lemma, _, label in data]))
+    out_src.write("\n".join([" ".join([l if l != ' ' else '#' for l in lemma]) + " " + " ".join(label.split(";")) for lemma, _, label in data]))
 
   with codecs.open(output + "/" + FN.split("/")[-1] + "-tgt.txt", "w", 'utf-8') as out_tgt:
-    out_tgt.write("\n".join([" ".join([w for w in wf]) for _, wf, _ in data]))
+    out_tgt.write("\n".join([" ".join([w if w != ' ' else '#' for w in wf]) for _, wf, _ in data]))

@@ -5,7 +5,7 @@ ROOT="$1"
 MODEL="$2"
 LANG="$3"
 SETTING="$4"
-MODE_FN="$(basename $MODEL)"
+MODEL_FN="$(basename $MODEL)"
 
 python "$ROOT"/sigmorphon-data/scripts/merge_data.py "$ROOT"/sigmorphon-data/data/ "$LANG" "test" "$SETTING" "$FN" "lang_distinct"
 python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/answers/"$LANG"-uncovered-test "test" "$ROOT"/sigmorphon-data/ONMT_data "$LANG"-"$SETTING"

@@ -5,7 +5,7 @@ ROOT="$1"
 MODEL="$2"
 LANG="$3"
 SETTING="$4"
-MODE_FN="$(basename $MODEL)"
+MODEL_FN="$(basename $MODEL)"
 
 #Don't need to use merge to do "language_agnostic" change since that is the default behavior
 python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/answers/"$LANG"-uncovered-test "test" "$ROOT"/sigmorphon-data/ONMT_data "$LANG"-"$SETTING"

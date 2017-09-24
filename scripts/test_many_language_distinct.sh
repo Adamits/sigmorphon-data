@@ -4,7 +4,7 @@
 ROOT="$1"
 MODEL="$2"
 SETTING="$3"
-MODE_FN="$(basename $MODEL)"
+MODEL_FN="$(basename $MODEL)"
 
 read -p "Which languages? " LANGS
 
@@ -18,11 +18,15 @@ fi
 
 IFS=' ' read -r -a LANGSARRAY <<< "$LANGSTRING"
 
+cat "$ROOT"/accuracies/"$MODEL_FN".acc
+
 for lang in LANGSARRAY
 do
   python "$ROOT"/sigmorphon-data/scripts/merge_data.py "$ROOT"/sigmorphon-data/data/ "$LANG" "test" "$SETTING" "$FN" "lang_distinct"
   python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/answers/"$LANG"-uncovered-test "test" "$ROOT"/sigmorphon-data/ONMT_data "$LANG"-"$SETTING"
   python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/sigmorphon-data/ONMT_data/test-"$LANG"-"$SETTING"-src.txt -tgt "$ROOT"/sigmorphon-data/ONMT_data/test-"$LANG"-"$SETTING"-tgt.txt  -output "$ROOT"/sigmorphon-data/predictions/"$LANG-$SETTING-$MODEL_FN"-pred.txt -replace_unk -verbose
-  echo "$lang"
   python "$ROOT"/sigmorphon-data/scripts/evalm.py --gold "$ROOT"/sigmorphon-data/ONMT_data/test-"$LANG"-"$SETTING"-tgt.txt --guess "$ROOT"/sigmorphon-data/predictions/"$LANG-$SETTING-$MODEL_FN"-pred.txt
+  echo "$lang": "$ACC"\n >> "$ROOT"/accuracies/"$MODEL_FN".acc
 done
+
+python "$ROOT"/sigmorphon-data/scripts/calculate_total_accuracies.py "$ROOT"/accuracies/"$MODEL_FN".acc
