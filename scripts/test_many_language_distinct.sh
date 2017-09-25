@@ -6,6 +6,8 @@ MODEL="$2"
 SETTING="$3"
 MODEL_FN="$(basename $MODEL)"
 
+MODEL_FN="${MODEL_FN%.*}"
+
 read -p "Which languages? " LANGS
 
 LANGSTRING=$( echo "${LANGS[*]}" )
@@ -18,15 +20,14 @@ fi
 
 IFS=' ' read -r -a LANGSARRAY <<< "$LANGSTRING"
 
-cat "$ROOT"/accuracies/"$MODEL_FN".acc
-
-for lang in LANGSARRAY
+for lang in "${LANGSARRAY[@]}"
 do
-  python "$ROOT"/sigmorphon-data/scripts/merge_data.py "$ROOT"/sigmorphon-data/data/ "$LANG" "test" "$SETTING" "$FN" "lang_distinct"
-  python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/answers/"$LANG"-uncovered-test "test" "$ROOT"/sigmorphon-data/ONMT_data "$LANG"-"$SETTING"
-  python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/sigmorphon-data/ONMT_data/test-"$LANG"-"$SETTING"-src.txt -tgt "$ROOT"/sigmorphon-data/ONMT_data/test-"$LANG"-"$SETTING"-tgt.txt  -output "$ROOT"/sigmorphon-data/predictions/"$LANG-$SETTING-$MODEL_FN"-pred.txt -replace_unk -verbose
-  python "$ROOT"/sigmorphon-data/scripts/evalm.py --gold "$ROOT"/sigmorphon-data/ONMT_data/test-"$LANG"-"$SETTING"-tgt.txt --guess "$ROOT"/sigmorphon-data/predictions/"$LANG-$SETTING-$MODEL_FN"-pred.txt
-  echo "$lang": "$ACC"\n >> "$ROOT"/accuracies/"$MODEL_FN".acc
+  python "$ROOT"/sigmorphon-data/scripts/merge_data.py "$ROOT"/sigmorphon-data/answers/ "$lang" "test" "$SETTING" "$lang" "lang_distinct"
+  python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/answers/"$lang"-uncovered-test-lang_distinct "$ROOT"/sigmorphon-data/ONMT_data
+  python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_distinct-src.txt -tgt "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_distinct-tgt.txt  -output "$ROOT"/sigmorphon-data/predictions/"$lang"-uncovered-test-lang_distinct-pred.txt -replace_unk
+  # Write to the accuracies file
+  ACC=$(python "$ROOT"/sigmorphon-data/scripts/evalm.py --gold "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_distinct-tgt.txt --guess "$ROOT"/sigmorphon-data/predictions/"$lang"-uncovered-test-lang_distinct-pred.txt)
+  echo "$lang: $ACC" >> "$ROOT"/sigmorphon-data/accuracies/"$MODEL_FN".acc
 done
 
-python "$ROOT"/sigmorphon-data/scripts/calculate_total_accuracies.py "$ROOT"/accuracies/"$MODEL_FN".acc
+python "$ROOT"/sigmorphon-data/scripts/calculate_total_accuracies.py "$ROOT"/sigmorphon-data/accuracies/"$MODEL_FN".acc

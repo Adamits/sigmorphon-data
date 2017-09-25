@@ -55,4 +55,4 @@ if __name__ == "__main__":
     gold = read(args.gold)
     guess = read(args.guess)
 
-    print("acccuracy:\t{0:.2f}\nlevenshtein:\t{1:.2f}".format(*eval_form(gold, guess)))
+    print("acccuracy: {0:.2f} levenshtein: {1:.2f}".format(*eval_form(gold, guess)))

@@ -26,15 +26,17 @@ if __name__=='__main__':
   elif mode == "dev":
     end = "-" + mode
   elif mode == "test":
-    end = "-covered-" + test
+    end = "-uncovered-test"
 
   if merge_type == "lang_agnostic":
+    print("MERGING LANGUAGE DATA...")
     with codecs.open(input_dir + outfile_name + end + "-" + merge_type, "w", 'utf-8') as out:
       for lang in languages.split(" "):
         FN = input_dir + lang + end
         out.write(codecs.open(FN, "r").read())
 
   elif merge_type == "lang_distinct":
+    print("MERGING LANGUAGE DATA...")
     with codecs.open(input_dir + outfile_name + end + "-" + merge_type, "w", 'utf-8') as out:
       for lang in languages.split(" "):
         FN = input_dir + lang + end

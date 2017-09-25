@@ -19,9 +19,11 @@ if __name__=='__main__':
 
   total_acc = 0
   total_lev = 0
-  for lang, acc_label, acc, lev_label, lev in data:
-    total_acc += acc
-    total_lev += lev
+  print(data)
 
-    print "AVERAGE ACCURACY: %.2f" % (total_acc / len(data)
-    print "AVERAGE LEVENSHTEIN DISTANCE: %.2f" % (total_lev / len(data)
+  for lang, acc_label, acc, lev_label, lev in data:
+    total_acc += float(acc)
+    total_lev += float(lev)
+
+  print("AVERAGE ACCURACY: %.2f" % (total_acc / len(data)))
+  print("AVERAGE LEVENSHTEIN DISTANCE: %.2f" % (total_lev / len(data)))
