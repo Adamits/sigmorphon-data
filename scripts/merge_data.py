@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import argv, stderr
+from util.lang2family import lang2family
 import codecs
 
 """
@@ -42,5 +43,12 @@ if __name__=='__main__':
         FN = input_dir + lang + end
         data = [l.strip().split('\t') for l in codecs.open(FN, 'r', 'utf-8') if l.strip() != '']
         out.write("\n".join(["%s\t%s\t%s;%s" % (lemma, wf, label, lang) for lemma, wf, label in data]) + "\n")
+  elif merge_type == "family_tags":
+    print("MERGING LANGUAGE DATA...")
+    with codecs.open(input_dir + outfile_name + end + "-" + merge_type, "w", 'utf-8') as out:
+      for lang in languages.split(" "):
+        FN = input_dir + lang + end
+        data = [l.strip().split('\t') for l in codecs.open(FN, 'r', 'utf-8') if l.strip() != '']
+        out.write("\n".join(["%s\t%s\t%s;%s;%s" % (lemma, wf, label, lang, family2tag[lang]) for lemma, wf, label in data]) + "\n")
   else:
     raise Exception("Please choose a merge_type of either lang_agnostic or lang_distinct")

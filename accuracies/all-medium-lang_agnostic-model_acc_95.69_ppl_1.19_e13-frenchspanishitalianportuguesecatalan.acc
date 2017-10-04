@@ -1,0 +1,5 @@
+french: acccuracy: 73.00 levenshtein: 0.82
+spanish: acccuracy: 60.00 levenshtein: 1.16
+italian: acccuracy: 85.40 levenshtein: 0.49
+portuguese: acccuracy: 90.50 levenshtein: 0.22
+catalan: acccuracy: 54.90 levenshtein: 1.49

@@ -4,3 +4,4 @@
 *.pyc
 models/*
 ONMT_data/*
+predictions/*
