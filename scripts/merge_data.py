@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import argv, stderr
-from util.lang2family import lang2family
+# from util.lang2family import lang2family
 import codecs
 
 """

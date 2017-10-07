@@ -6,6 +6,7 @@
 ROOT="$1"
 SETTING="$2"
 FN="$3"
+EPOCHS="$4"
 
 read -p "Which languages? " LANGS
 
@@ -22,4 +23,4 @@ python "$ROOT"/sigmorphon-data/scripts/merge_data.py "$ROOT"/sigmorphon-data/dat
 python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/data/"$FN"-train-"$SETTING"-lang_agnostic "$ROOT"/sigmorphon-data/ONMT_data
 python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/data/"$FN"-dev-lang_agnostic "$ROOT"/sigmorphon-data/ONMT_data
 python "$ROOT"/OpenNMT-py/preprocess.py -train_src  "$ROOT"/sigmorphon-data/ONMT_data/"$FN"-train-"$SETTING"-lang_agnostic-src.txt -train_tgt  "$ROOT"/sigmorphon-data/ONMT_data/"$FN"-train-"$SETTING"-lang_agnostic-tgt.txt -valid_src  "$ROOT"/sigmorphon-data/ONMT_data/"$FN"-dev-lang_agnostic-src.txt -valid_tgt  "$ROOT"/sigmorphon-data/ONMT_data/"$FN"-dev-lang_agnostic-tgt.txt -save_data "$ROOT"/sigmorphon-data/models/"$FN"-"$SETTING"-lang_agnostic
-python "$ROOT"/OpenNMT-py/train.py -data "$ROOT"/sigmorphon-data/models/"$FN"-"$SETTING"-lang_agnostic -save_model "$ROOT"/sigmorphon-data/models/"$FN"-"$SETTING"-lang_agnostic-model
+python "$ROOT"/OpenNMT-py/train.py -data "$ROOT"/sigmorphon-data/models/"$FN"-"$SETTING"-lang_agnostic -save_model "$ROOT"/sigmorphon-data/models/"$FN"-"$SETTING"-lang_agnostic-model -epochs "$EPOCHS"

@@ -28,10 +28,8 @@ for l in albanian arabic armenian basque bengali bulgarian catalan czech danish 
   done
   BESTMODEL=$(find "$ROOT"/sigmorphon-data/models -name "$l"-"$SETTING"-model_acc_"$model_acc"*)
   # If there are multiple models with the same acc, just take the first one
-  OLDIFS="$IFS"
-  IFS="\n"
   BESTMODEL_ARRAY=( $BESTMODEL )
   BESTMODEL=${BESTMODEL_ARRAY[0]}
-  IFS=$OLDIFS
+  echo $BESTMODEL
   /bin/bash "$ROOT"/sigmorphon-data/scripts/test.sh "$ROOT" "$BESTMODEL" "$l" "$SETTING"
 done

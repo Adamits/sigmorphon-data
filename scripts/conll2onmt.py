@@ -16,6 +16,8 @@ if __name__=='__main__':
   FN = argv[1]
   output = argv[2]
 
+  print("generating ONMT formatted data...")
+
   data = [l.strip().split('\t') for l in codecs.open(FN, 'r', 'utf-8') if l.strip() != '']
 
   with codecs.open(output + "/" + FN.split("/")[-1] + "-src.txt", "w", 'utf-8') as out_src:

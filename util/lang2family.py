@@ -1,1 +1,8 @@
-lang2family.py
+lang2family = {
+  "albanian": "",
+  "arabic": "",
+  "armenian": "",
+  "basque": "",
+  "bengali": "",
+
+}
