@@ -1,0 +1,9 @@
+norwegian-bokmal: acccuracy: 82.90 levenshtein: 0.43
+english: acccuracy: 88.70 levenshtein: 0.32
+icelandic: acccuracy: 66.90 levenshtein: 0.99
+norwegian-nynorsk: acccuracy: 62.10 levenshtein: 1.01
+dutch: acccuracy: 77.90 levenshtein: 0.53
+german: acccuracy: 73.80 levenshtein: 0.91
+swedish: acccuracy: 77.00 levenshtein: 0.69
+danish: acccuracy: 77.70 levenshtein: 0.57
+faroese: acccuracy: 62.80 levenshtein: 1.16

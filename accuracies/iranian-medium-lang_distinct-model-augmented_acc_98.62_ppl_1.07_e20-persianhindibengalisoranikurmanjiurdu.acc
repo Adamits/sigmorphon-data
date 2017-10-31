@@ -1,0 +1,6 @@
+persian: acccuracy: 87.30 levenshtein: 0.35
+hindi: acccuracy: 92.90 levenshtein: 0.11
+bengali: acccuracy: 86.00 levenshtein: 0.35
+sorani: acccuracy: 75.50 levenshtein: 0.79
+kurmanji: acccuracy: 91.00 levenshtein: 0.48
+urdu: acccuracy: 96.40 levenshtein: 0.07

@@ -31,9 +31,9 @@ for lang in "${LANGSARRAY[@]}"
 do
   python "$ROOT"/sigmorphon-data/scripts/merge_data.py "$ROOT"/sigmorphon-data/answers/ "$lang" "test" "$SETTING" "$lang" "lang_agnostic"
   python "$ROOT"/sigmorphon-data/scripts/conll2onmt.py "$ROOT"/sigmorphon-data/answers/"$lang"-uncovered-test-lang_agnostic "$ROOT"/sigmorphon-data/ONMT_data
-  python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_agnostic-src.txt -tgt "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_agnostic-tgt.txt  -output "$ROOT"/sigmorphon-data/predictions/"$MODEL_FN-${LANGSTRING//[[:blank:]]/}"-pred.txt -replace_unk
+  python "$ROOT"/OpenNMT-py/translate.py -model "$MODEL" -src "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_agnostic-src.txt -tgt "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_agnostic-tgt.txt  -output "$ROOT"/sigmorphon-data/predictions/"$MODEL_FN-${lang//[[:blank:]]/}"-pred.txt -replace_unk
   # Write to the accuracies file
-  ACC=$(python "$ROOT"/sigmorphon-data/scripts/evalm.py --gold "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_agnostic-tgt.txt --guess "$ROOT"/sigmorphon-data/predictions/"$MODEL_FN-${LANGSTRING//[[:blank:]]/}"-pred.txt)
+  ACC=$(python "$ROOT"/sigmorphon-data/scripts/evalm.py --gold "$ROOT"/sigmorphon-data/ONMT_data/"$lang"-uncovered-test-lang_agnostic-tgt.txt --guess "$ROOT"/sigmorphon-data/predictions/"$MODEL_FN-${lang//[[:blank:]]/}"-pred.txt)
   echo "$lang: $ACC" >> "$ACCFILE"
 done
 

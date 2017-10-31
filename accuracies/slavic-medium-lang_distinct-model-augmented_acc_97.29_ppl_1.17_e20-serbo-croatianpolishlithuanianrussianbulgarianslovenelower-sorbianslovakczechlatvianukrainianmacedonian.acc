@@ -1,0 +1,12 @@
+serbo-croatian: acccuracy: 83.30 levenshtein: 0.55
+polish: acccuracy: 78.00 levenshtein: 0.72
+lithuanian: acccuracy: 56.00 levenshtein: 0.88
+russian: acccuracy: 82.80 levenshtein: 0.79
+bulgarian: acccuracy: 79.60 levenshtein: 0.47
+slovene: acccuracy: 86.10 levenshtein: 0.36
+lower-sorbian: acccuracy: 82.60 levenshtein: 0.47
+slovak: acccuracy: 73.50 levenshtein: 0.72
+czech: acccuracy: 83.70 levenshtein: 0.48
+latvian: acccuracy: 87.00 levenshtein: 0.36
+ukrainian: acccuracy: 82.60 levenshtein: 0.47
+macedonian: acccuracy: 88.50 levenshtein: 0.37

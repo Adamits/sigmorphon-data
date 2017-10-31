@@ -1,0 +1,4 @@
+hungarian: acccuracy: 53.40 levenshtein: 1.25
+northern-sami: acccuracy: 58.30 levenshtein: 1.38
+finnish: acccuracy: 65.20 levenshtein: 1.46
+estonian: acccuracy: 73.50 levenshtein: 0.62
